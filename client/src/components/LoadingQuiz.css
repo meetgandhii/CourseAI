@@ -1,0 +1,67 @@
+/* Quiz Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Quiz Component Styles */
+.quiz-container {
+    animation: fadeIn 0.3s ease-out;
+}
+
+span.options {
+    color: black !important;
+}
+
+.quiz-question {
+    animation: slideIn 0.3s ease-out;
+}
+
+.answer-button {
+    transition: all 0.2s ease-out;
+}
+
+.answer-button:hover:not(:disabled) {
+    transform: translateX(5px);
+}
+
+.answer-button:disabled {
+    cursor: not-allowed;
+}
+
+.feedback-icon {
+    animation: fadeIn 0.2s ease-out;
+}
+
+.score-display {
+    transition: all 0.3s ease-out;
+}
+
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
