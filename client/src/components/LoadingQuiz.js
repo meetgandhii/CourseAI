@@ -12,7 +12,7 @@ const LoadingQuiz = ({ topic }) => {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [quizCompleted, setQuizCompleted] = useState(false);
-    const number_of_questions = 5;
+    const number_of_questions = 25;
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -27,7 +27,7 @@ const LoadingQuiz = ({ topic }) => {
             setLoading(true);
             setError(null);
 
-            const response = await axios.post('http://localhost:8080/api/get-quiz', {
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/get-quiz`, {
                 topic,
                 number_of_questions
             });
@@ -115,7 +115,7 @@ const LoadingQuiz = ({ topic }) => {
     return (
         <div className="w-full max-w-2xl mx-auto my-4">
             <div className="bg-gray-100 rounded-lg p-6 shadow-lg">
-                <h2 className="text-2xl font-bold mb-4">Quiz on {topic}</h2>
+                <h2 className="text-2xl font-bold mb-4">Your schedule is getting created, till then lets Quiz you on some basics of {topic}</h2>
 
                 <div className="flex justify-between items-center mb-4">
                     <span className="text-sm text-gray-600">

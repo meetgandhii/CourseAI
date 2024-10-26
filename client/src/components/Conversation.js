@@ -332,6 +332,15 @@ const Conversation = () => {
 
             {showForm ? (
                 <>
+                {aiResponding && (
+                        <>
+                            {level !== "Beginner" ? (
+                                <LoadingQuiz topic={conversation.title} />
+                            ) : (
+                                <BubblePopperGame />
+                            )}
+                        </>
+                    )}
                     <form onSubmit={handleFormSubmit} className="setup-form">
                         <select value={level} onChange={(e) => setLevel(e.target.value)} required>
                             <option value="">Select Level</option>
@@ -352,15 +361,7 @@ const Conversation = () => {
                             {aiResponding ? <LoadingSpinner /> : 'Generate Course Schedule'}
                         </button>
                     </form>
-                    {aiResponding && (
-                        <>
-                            {level !== "Beginner" ? (
-                                <LoadingQuiz topic={conversation.title} />
-                            ) : (
-                                <BubblePopperGame />
-                            )}
-                        </>
-                    )}
+                    
                 </>
             ) : (
                 // <div className="course-schedule messages">
