@@ -55,7 +55,7 @@ async function generateQuestions(topic, numberOfQuestions) {
 }
 
 app.get('/api/welcome', (req, res) => {
-    res.send("Welcome to the backend, if you see this, it means we are live");
+    res.send("Welcome to the backend (app.js), if you see this, it means we are live");
 });
 
 app.post('/api/course-schedule', async (req, res) => {

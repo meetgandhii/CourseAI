@@ -17,7 +17,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.get('/api/welcome', (req, res) => {
-  res.send("Welcome to the course ai backend, if you see this, it means we are live!");
+  res.send("Welcome to the course ai backend (server.js), if you see this, it means we are live!");
 });
 
 // Routes
