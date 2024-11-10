@@ -35,11 +35,6 @@ const Conversation = () => {
 
     const messagesEndRef = useRef(null);
 
-    // Function to scroll to bottom
-    // const scrollToBottom = () => {
-    //     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    // };
-
     const handleEditResource = (weekNum, dayNum, time, contentId, resourceId, forItem) => {
         setEditingResource({ weekNum, dayNum, time, contentId, resourceId, forItem });
     };
@@ -68,7 +63,9 @@ const Conversation = () => {
     };
 
 
-
+    const isYoutube = (resource) => {
+        return resource.link.includes('youtube.com') || resource.link.includes('youtu.be');
+    }
     // Use effect to scroll to bottom when messages change
     // useEffect(() => {
     //     scrollToBottom();
@@ -213,6 +210,60 @@ const Conversation = () => {
         }
     };
 
+    const textResourceObject = (resource) => {
+        const parts = resource.description.split('...').map(part => part.trim());
+
+        const copyToClipboard = (text) => {
+            navigator.clipboard.writeText(text)
+                .catch(err => console.error('Failed to copy text: ', err));
+        };
+
+        return (
+            <div className="mt-4">
+                {parts.length>1?<>
+                    <p className="mb-2">
+                    Please go to the following link, and press cmd/ctrl+f to find these tag lines,
+                    because that is the only part you need to read from the page
+                </p>
+                <a href={resource.link} className="mb-4">Link - {resource.link}</a>
+                <div className="space-y-3">
+                    {parts.map((part, index) => (
+                        <div
+                            key={index}
+                            className="flex items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors group"
+                        >
+                            <p className="flex-grow font-mono text-sm">{part}</p>
+                            <button
+                                onClick={() => copyToClipboard(part)}
+                                className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm flex items-center"
+                            >
+                                <svg
+                                    className="w-4 h-4 mr-1"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                                    />
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                    ))}
+                </div>
+                </> : <>
+                <p>{resource.description}</p>
+                <a href={resource.link}>Read the entire resource here if you want to</a>
+                </>}
+            </div>
+        );
+    };
+
+
     const renderTimeSlot = (timeSlot, weekNum, dayNum) => (
         <div key={timeSlot.time} className="time-slot">
             <h4 className="time">{timeSlot.time} - {timeSlot.subtitle}</h4>
@@ -257,11 +308,21 @@ const Conversation = () => {
                                                                     <button onClick={() => handleEditResource(weekNum, dayNum, timeSlot.time, content.id, resource.id, todoItem)}>
                                                                         <Edit size={16} />
                                                                     </button>
-                                                                    
+
                                                                 </>
-                                                            )}<a style={{ marginLeft: "10px" }} href={resource.link} target="_blank" rel="noopener noreferrer">
-                                                                        Resource {index + 1} - {resource.description}
-                                                                    </a>
+                                                            )}
+
+                                                            {!isYoutube(resource)
+                                                                ? textResourceObject(resource)
+                                                                :
+                                                                <a
+                                                                    style={{ marginLeft: "10px" }}
+                                                                    href={resource.link}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                >Watch this video - ${resource.description}
+
+                                                                </a>}
                                                         </div>
                                                     ))}
                                                 </div>
@@ -332,7 +393,7 @@ const Conversation = () => {
 
             {showForm ? (
                 <>
-                {aiResponding && (
+                    {aiResponding && (
                         <>
                             {level !== "Beginner" ? (
                                 <LoadingQuiz topic={conversation.title} />
@@ -361,7 +422,7 @@ const Conversation = () => {
                             {aiResponding ? <LoadingSpinner /> : 'Generate Course Schedule'}
                         </button>
                     </form>
-                    
+
                 </>
             ) : (
                 // <div className="course-schedule messages">

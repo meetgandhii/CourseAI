@@ -6,5 +6,9 @@
     "quiz_requester": {
         "identity_key": "58354a9b57d37c51f095e9bc83ebc2179cc61597c59c57d63505aad41482c897",
         "wallet_key": "gaJM6u88pcrVPKZwax6pCOTaBrYeE7t8PZEo6dEcX3Y="
+    },
+    "quiz_agent": {
+        "identity_key": "3a132ca094f215aaf59671f5be92fb7b1f9c0862304cab0652c16748d633df70",
+        "wallet_key": "+DKhfOtjcIb8MK9UFxYoJJ5VbCGsmHQ+7lHIJ7SmKrQ="
     }
 }
