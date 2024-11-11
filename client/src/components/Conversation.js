@@ -220,44 +220,50 @@ const Conversation = () => {
 
         return (
             <div className="mt-4">
-                {parts.length>1?<>
+                {parts.length > 1 ? <>
                     <p className="mb-2">
-                    Please go to the following link, and press cmd/ctrl+f to find these tag lines,
-                    because that is the only part you need to read from the page
-                </p>
-                <a href={resource.link} className="mb-4">Link - {resource.link}</a>
-                <div className="space-y-3">
-                    {parts.map((part, index) => (
-                        <div
-                            key={index}
-                            className="flex items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors group"
-                        >
-                            <p className="flex-grow font-mono text-sm">{part}</p>
-                            <button
-                                onClick={() => copyToClipboard(part)}
-                                className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm flex items-center"
+                        Please go to the following link, and press cmd/ctrl+f to find these tag lines,
+                        because that is the only part you need to read from the page
+                    </p>
+                    <a href={resource.link} className="mb-4">Link - {resource.link}</a>
+                    <div className="space-y-3">
+                        {parts.map((part, index) => (
+                            <div
+                                key={index}
+                                className="flex items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors group"
                             >
-                                <svg
-                                    className="w-4 h-4 mr-1"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
+                                <p className="flex-grow font-mono text-sm">{part}</p>
+                                <button
+                                    onClick={() => copyToClipboard(part)}
+                                    className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm flex items-center"
                                 >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
-                                    />
-                                </svg>
-                                Copy
-                            </button>
-                        </div>
-                    ))}
-                </div>
+                                    <svg
+                                        className="w-4 h-4 mr-1"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                                        />
+                                    </svg>
+                                    Copy
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </> : <>
-                <p>{resource.description}</p>
-                <a href={resource.link}>Read the entire resource here if you want to</a>
+                    <p>{resource.description}</p>
+                    <a
+                        href={resource.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Read the entire resource here if you want to
+                    </a>
                 </>}
             </div>
         );
