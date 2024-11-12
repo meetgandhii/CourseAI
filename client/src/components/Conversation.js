@@ -262,7 +262,7 @@ const Conversation = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Read the entire resource here if you want to
+                        Read the entire resource here
                     </a>
                 </>}
             </div>
