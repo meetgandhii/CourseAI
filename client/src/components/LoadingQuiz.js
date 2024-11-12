@@ -27,7 +27,7 @@ const LoadingQuiz = ({ topic }) => {
             setLoading(true);
             setError(null);
 
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/get-quiz`, {
+            const response = await axios.post(`${process.env.REACT_APP_QUESTIONS_URL}/get-quiz`, {
                 topic,
                 number_of_questions
             });
